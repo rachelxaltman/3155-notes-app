@@ -1,0 +1,478 @@
+﻿
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+
+
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+             
+        <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+        <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+        <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+        <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+        <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+    
+        <a href="{{ url_for ('match_overview') }}" class="topLinks"> Battle Royale </a>
+</head>
+<body>
+
+    <style>
+        body {
+            width: 94%;
+            height: 100%;
+            background-image: url(static/skypic.jpg);
+            /* background-position: center; */
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100%;
+            min-width: 1017px;
+          
+        }
+
+        @media screen and (max-width: 1024px) { /* Specific to this particular image */
+            img.bg {
+                left: 50%;
+                margin-left: -512px; /* 50% */
+            }
+        }
+    </style>
+
+
+
+
+
+
+    <br />
+    <div class="notesFor">
+        Notes for {{user}}!
+    </div>
+    <br />
+
+
+
+    <div class="backgroundRect">
+        {% for note in notes %}
+        {% if note.pinned %}
+        <table>
+
+            <tr>
+                <div class="formatNotes">
+                    <div class="containNoteText">
+
+                        <td>
+                            <a href="{{ url_for('get_note', note_id=note.id) }}"></a>
+
+                            {% if note.isTask %}
+                            <div class="stickyNote">
+                                {% if not note.taskFinished %}
+                                <div class="checkmark">
+                                    <a href="{{ url_for('check_task', note_id=note.id) }}" class="pin">
+                                        <img src="{{url_for('static', filename='nocheck.png')}}" class="pin" onclick="">
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if note.taskFinished %}
+                                <div class="checkmark">
+                                    <a href="{{ url_for('check_task', note_id=note.id) }}" class="pin">
+                                        <img src="{{url_for('static', filename='yescheck.png')}}" class="pin">
+                                    </a>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            {% endif %}
+                        </td>
+                    </div>
+
+
+
+
+
+                    <div class="formatNotes">
+                        <div class="containNoteText">
+
+                            <td>
+                                <a href="{{ url_for('get_note', note_id=note.id) }}"></a>
+                                <div class="stickyNote">
+                                    <img src="{{url_for('static', filename='pin.png')}}" class="pin">
+                                    <br />
+                                    {{ note.title }}
+
+
+                                </div>
+                            </td>
+                        </div>
+
+
+                        <br />
+                        <br />
+
+                        <div class="containNoteEdit">
+                            <div class="editNote">
+
+                                <td>
+
+                                    <a href="{{ url_for('update_note', note_id=note.id) }}" class="editImages">
+
+                                        <img src="{{url_for('static', filename='editicon2.png')}}" class="editImages">
+                                    </a>
+                                </td>
+                            </div>
+
+                        </div>
+                        <br />
+                        <br />
+
+                        <div class="containNoteDelete">
+                            <div class="deleteNote">
+                                <td>
+
+                                    <form action="{{ url_for('delete_note', note_id=note.id) }}" method="post">
+                                        <input type="submit" name="Delete" value="Delete" class="button">
+                                    </form>
+
+                                </td>
+                            </div>
+                        </div>
+
+
+            </tr>
+
+            <div class="containTexts">
+                <div class="containText">
+                    <td>
+
+                        <a href="{{ url_for('get_note', note_id=note.id) }}"></a>
+                        <div class="notess">
+
+                            {{ note.text }}
+
+                    </td>
+                </div>
+            </div>
+
+
+
+
+            <div class="containComments">
+                <div class="containCom">
+                    <td>
+
+                        <form action="{{ url_for('delete_note', note_id=note.id) }}" method="post">
+                        </form>
+
+                    </td>
+                </div>
+            </div>
+
+
+            <!--Lets user Add a new Comment by clicking on the image-->
+
+            <div class="addComments">
+                <td>
+                    <div class="text2">
+                        Add a Comment:
+                    </div>
+
+                    <a href="{{ url_for('get_note', note_id=note.id) }}" class="addComment">
+
+                        <a href="{{ url_for('get_note', note_id=note.id) }}" class="addComment">
+
+
+                            <img src="{{url_for('static', filename='addcomment.png')}}" class="addCommentss">
+                        </a>
+
+                </td>
+            </div>
+            </tr>
+            {% if note.comments %}
+            {% if note.comments|length > 0 %}
+            <td>
+                <ul>
+
+
+                    {% for comment in note.comments %}
+                    <div class="containCommentTexts">
+                        <li>
+                            <div class="containCommentText">
+
+                                {{ comment.text }}
+                            </div>
+                    </div>
+
+                    <div class="containCommentTexts">
+                        </li>
+                        <div class="containCommentText">
+                            <a href="{{ url_for('update_comment', comment_id=comment.id) }}" class="editComment">
+                                <img src="{{url_for('static', filename='editcomment.png')}}" class="editComment">
+                            </a>
+                        </div>
+
+                        <div class="containCommentTexts">
+
+
+                            <div class="containCommentText">
+                                <!--FIX DELETETO DELETE COMMENTS-->
+                                <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="post">
+                                    <input type="submit" name="Delete" value="Delete" class="button">
+                                </form>
+                            </div>
+
+
+
+
+                        </div>
+
+                        {% endfor %}
+                </ul>
+            </td>
+            {% endif %}
+            {% endif %}
+
+
+        </table>
+
+
+
+
+    {% endif %}
+    {% endfor %}
+    
+
+<!--UNPINNED-->
+
+
+
+        {% for note in notes %}
+        {% if not note.pinned %}
+        <table>
+
+            <tr>
+                <div class="formatNotes">
+                    <div class="containNoteText">
+
+
+
+                        <div class="containNoteText">
+
+                            <td>
+                                <a href="{{ url_for('get_note', note_id=note.id) }}"></a>
+
+                                {% if note.isTask %}
+                                <div class="stickyNote">
+                                    {% if not note.taskFinished %}
+                                    <div class="checkmark">
+                                        <a href="{{ url_for('check_task', note_id=note.id) }}" class="pin">
+                                            <img src="{{url_for('static', filename='nocheck.png')}}" class="pin" onclick="">
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    {% if note.taskFinished %}
+                                    <div class="checkmark">
+                                        <a href="{{ url_for('check_task', note_id=note.id) }}" class="pin">
+                                            <img src="{{url_for('static', filename='yescheck.png')}}" class="pin">
+                                        </a>
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+                                {% endif %}
+                            </td>
+                        </div>
+
+
+
+                        <td>
+                            <a href="{{ url_for('get_note', note_id=note.id) }}"></a>
+                            <div class="stickyNote">
+
+                                {{ note.title }}
+
+
+                            </div>
+                        </td>
+                    </div>
+
+
+                    <br />
+                    <br />
+
+                    <div class="containNoteEdit">
+                        <div class="editNote">
+
+                            <td>
+
+                                <a href="{{ url_for('update_note', note_id=note.id) }}" class="editImagesss">
+
+                                    <img src="{{url_for('static', filename='editicon2.png')}}" class="editImagesss">
+                                </a>
+                            </td>
+                        </div>
+
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="containNoteDelete">
+                        <div class="deleteNote">
+                            <td>
+
+                                <form action="{{ url_for('delete_note', note_id=note.id) }}" method="post">
+                                    <input type="submit" name="Delete" value="Delete" class="button">
+                                </form>
+
+                            </td>
+                        </div>
+                    </div>
+
+
+            </tr>
+
+            <div class="containTexts">
+                <div class="containText">
+                    <td>
+
+                        <a href="{{ url_for('get_note', note_id=note.id) }}"></a>
+                        <div class="notess">
+
+                            {{ note.text }}
+
+                    </td>
+                </div>
+            </div>
+
+
+
+
+            <div class="containComments">
+                <div class="containCom">
+                    <td>
+
+                        <form action="{{ url_for('delete_note', note_id=note.id) }}" method="post">
+                        </form>
+
+                    </td>
+                </div>
+            </div>
+
+
+            <!--Lets user Add a new Comment by clicking on the image-->
+
+            <div class="addComments">
+                <td>
+                    <div class="text2">
+                        Add a Comment:
+                    </div>
+
+                    <a href="{{ url_for('get_note', note_id=note.id) }}" class="addComment">
+
+                        <a href="{{ url_for('get_note', note_id=note.id) }}" class="addComment">
+
+
+                            <img src="{{url_for('static', filename='addcomment.png')}}" class="addComment">
+                        </a>
+
+                </td>
+            </div>
+            </tr>
+
+            {% if note.comments %}
+            {% if note.comments|length > 0 %}
+            <td>
+                <ul>
+
+
+                    {% for comment in note.comments %}
+                    <div class="containCommentTexts">
+                        <li>
+                            <div class="containCommentText">
+
+                                {{ comment.text }}
+                            </div>
+                    </div>
+
+                   
+
+                <div class="containCommentTexts">
+                    </li>
+                    <div class="containCommentText">
+                        <a href="{{ url_for('update_comment', comment_id=comment.id) }}" class="editComment">
+                            <img src="{{url_for('static', filename='editcomment.png')}}" class="editComment">
+                        </a>
+                    </div>
+
+                    <div class="containCommentTexts">
+               
+                        <div class="containCommentText">
+
+                            <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="post">
+                                <input type="submit" name="Delete" value="Delete" class="button">
+                            </form> 
+                            <br />    <br />
+                        </div>
+
+                               
+                            </div>
+
+
+
+
+                        </div>
+
+                        {% endfor %}
+                </ul>
+            </td>
+            {% endif %}
+            {% endif %}
+
+
+
+            {% endif %}
+            {% endfor %}
+            <br />
+            <br />
+
+            <table>
+                <tr2>
+                    <!--Lets user Add a new Note by clicking on the image-->
+                    <div class="addNotes">
+                        <td2>
+                            <div class="text">
+                                Add a new Note:
+                            </div>
+
+                            <a href="{{ url_for('new_note') }}" class="addNote">
+
+                                <img src="{{url_for('static', filename='addtext.png')}}" class="addNote">
+                            </a>
+                        </td2>
+                    </div>
+
+                    <div class="backTab">
+                        <a href="{{ url_for ('index', notes_id = notes.id) }}" class="topLinks">
+                            <img src="{{url_for('static', filename='backimage.png')}}" class="backimage" onclick="goBackPage()">
+                        </a>
+                    </div>
+
+                    <!-- <img src="{{url_for('static', filename='ban.gif')}}" class="edits"> -->
+
+
+
+
+</body>
+</html>
+
+
+
+
+

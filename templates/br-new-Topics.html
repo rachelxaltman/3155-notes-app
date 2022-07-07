@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App - New Note</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+    <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+    <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+    <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+    <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+</head>
+
+<body>
+
+  
+
+    <div class="backgroundRect">
+        <h1>Welcome {{user}}! </h1>
+        <h1> New NA:BR Match</h1>
+
+        <form action="{{ url_for('new_topics', board_id=match.id) }}" method="post">
+
+            <div class="customTopic">
+                Custom Topics (optional)
+            </div>
+            </br>
+
+            <ui>
+                <div class="topics">
+                    <li>
+                        Topic 1
+                        <input type="text" name="text1" value="">
+                    </li>
+                </div>
+                <div class="topics">
+                    <li>
+                        Topic 2 <input type="text" name="text2" value="">
+                    </li>
+                </div>
+                <div class="topics">
+                    <li>
+                        Topic 3 <input type="text" name="text3" value="">
+                    </li>
+                    </div>
+
+            </ui>
+
+            <p>
+                <input type="submit" value="Start Match" />
+            </p>
+        </form>
+
+
+
+        <div class="backTab">
+            <img src="{{url_for('static', filename='backimage.png')}}" class="backimage" onclick="goBackPage()">
+            <td2>
+                <script>
+                    function goBackPage() {
+                        window.history.back();
+                    }
+                </script>
+            </td2>
+        </div>
+    </div>
+</body>
+</html>

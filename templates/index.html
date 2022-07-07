@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App</title>
+
+    <!-- styles -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+    <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+    <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+    <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+    <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+    <a href="{{ url_for ('match_overview') }}" class="topLinks"> Battle Royale </a>
+
+    <br />
+</head>
+<body>
+    <style>
+        body {
+            width: 94%;
+            height: 100%;
+            background-image: url(static/notes.jpg);
+            /* background-position: center; */
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100%;
+            min-width: 1017px;
+            /* width: 100%; */
+            /* height: auto; */
+            /* position: fixed; */
+            /* top: 0; */
+            /* left: 0; */
+        }
+
+        @media screen and (max-width: 1024px) { /* Specific to this particular image */
+            img.bg {
+                left: 50%;
+                margin-left: -512px; /* 50% */
+            }
+        }
+    </style>
+
+
+    <br />
+    <div class="backgroundRect">
+        <h1>Welcome {{user}} to your Notes!</h1>
+        <br>
+
+        <br>
+        <br>
+        <br>
+        <div class="homepageLinks">
+            <nav> <a href="/signIn" class="links"> Sign In! </a> </nav>
+            <br>
+            <br>
+            <br> <br>
+
+            <nav> <a href="/createAccount" class="links"> Create Account! </a> </nav>
+        </div>
+        </div>
+
+
+</body>
+</html>

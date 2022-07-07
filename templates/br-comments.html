@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App - View your Note</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+    <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+    <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+    <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+    <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+
+    <a href="{{ url_for ('match_overview') }}" class="topLinks"> Battle Royal </a>
+    <br />
+</head>
+<body>
+    <h1>Notes App: Battle Royale!</h1>
+    <h1>Note details</h1>
+    {% if match.round <= 3 %}
+    <h1>Topic: {{match.topic1}}</h1>
+    Quickly, add the first 3 comments you hear!
+    {% elif match.round <= 6 %}
+    <h1>Topic: {{match.topic1}}, {{match.topic2}},</h1>
+    Add another 3 comments!
+    {% elif match.round <= 9 %}
+    <h1>Topic: {{match.topic1}}, {{match.topic2}}, and {{match.topic3}}</h1>
+    Add another 3 comments!
+    {% endif %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Text</th>
+        </tr>
+        <tr>
+            <td>{{ note.title }}</td>
+            <td>{{ note.text1 }}{{ note.text2 }}{{ note.text3 }}</td>
+        </tr>
+    </table>
+
+    {% if proccomments %}
+    {% if proccomments|length > 0 %}
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in proccomments %}
+        <li>{{ comment.text }}</li>
+            {% if match.round == 2 or match.round == 5 or match.round == 8 %}
+            <form action="{{ url_for('brnote_comment_delete', match_id=match.id, brnote_id = note.id, brcomm_id=comment.id) }}" method="post">
+                <input type="submit" value="Delete">
+            </form>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+
+    {% if match.round == 2 %}
+        {% if proccomments|length < 3 %}
+        <form action="{{ url_for('brnote_comment', match_id = match.id, brnote_id=note.id) }}" method="post">
+            <div class="formwrapper">
+                <h2 class="title">Add a comment</h2>
+                <div class="form-field">
+                    {{ form.comm.label }} <br /> {{ form.comm }}
+                </div>
+                {{ form.submit }}
+            </div>
+        </form>
+        {% endif %}
+    {% elif match.round == 5 %}
+        {% if proccomments|length < 6 %}
+        <form action="{{ url_for('brnote_comment', match_id = match.id, brnote_id=note.id) }}" method="post">
+            <div class="formwrapper">
+                <h2 class="title">Add a comment</h2>
+                <div class="form-field">
+                    {{ form.comm.label }} <br /> {{ form.comm }}
+                </div>
+                {{ form.submit }}
+            </div>
+        </form>
+        {% endif %}
+    {% elif match.round == 8 %}
+        {% if proccomments|length < 9 %}
+        <form action="{{ url_for('brnote_comment', match_id = match.id, brnote_id=note.id) }}" method="post">
+            <div class="formwrapper">
+                <h2 class="title">Add a comment</h2>
+                <div class="form-field">
+                    {{ form.comm.label }} <br /> {{ form.comm }}
+                </div>
+                {{ form.submit }}
+            </div>
+        </form>
+        {% endif %}
+    {% endif %}
+
+    Finish Commenting
+    <div class="backTab">
+        <a href="{{ url_for ('view_match', match_id = match.id) }}" class="topLinks">
+            <img src="{{url_for('static', filename='backimage.png')}}" class="backimage" onclick="goBackPage()">
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App - New Note</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+    <div class="navigation">
+        <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+        <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+        <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+        <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+        <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+
+        <a href="{{ url_for ('match_overview') }}" class="topLinks"> Battle Royale </a>
+        </div>
+</head>
+<body>
+
+    <div style="background-image: url(static/skypic.jpg);">
+        <div class="backgroundRects">
+            <h1>Welcome {{user}}! </h1>
+            <h1> Please add your note!</h1>
+            <br />
+            {% if note %}
+            <form action="{{ url_for('update_note', note_id=note.id) }}" method="post">
+                {% else %}
+                <form action="new" method="post">
+                    {% endif %}
+
+                    <div class="title">
+                        Title:
+
+
+                        <input type="text" name="title" value="{% if note %}{{note.title}} {% endif %}">
+                    </div>
+
+
+
+                    <!-- Pin notes! -->
+                    {% if note %}
+                    {% if note.pinned %}
+                    <input type="checkbox" id="pin" name="pin" value="Pin" checked>
+                    <label for="pin">Pin note</label>
+                    {% else %}
+                    <input type="checkbox" id="pin" name="pin" value="Pin">
+                    <label for="pin">Pin note</label>
+                    {% endif %}
+                    {% endif %}
+
+                    <!-- Tasks! -->
+                    {% if note %}
+                    {% if note.isTask and not note.taskFinished %}
+                    <input type="checkbox" id="taskFinished" name="taskFinished" value="taskFinished">
+                    <label for="taskFinished">Task Finished</label>
+                    {% elif note.isTask and note.taskFinished %}
+                    <input type="checkbox" id="taskFinished" name="taskFinished" value="taskFinished" checked>
+                    <label for="taskFinished">Task Finished</label>
+                    {% endif %}
+                    {% endif %}
+                    <br />
+                    <div class="noteTitles">
+                        <p>Note: </p>
+
+                    </div>
+                    <div class="noteText">
+
+                        <textarea name="noteText" rows="6" cols="0">
+                    {% if note %}
+                        {{note.text}}
+                    {% else %}
+                        Add your new note here ...
+                    {% endif %}
+                </textarea>
+                    </div>
+
+                    {% if not note %}
+                    <div class="taskCheck">
+                        <input type="checkbox" , id="isTask" name="isTask" value="isTask">
+                        <label for="isTask">Task</label>
+                    </div>
+
+                    {% endif %}
+
+
+                    <p>
+                        {% if note %}
+                        <input type="submit" value="Update Note" />
+                        {% else %}
+                        <input type="submit" value="Add Note" />
+                        {% endif %}
+                    </p>
+                </form>
+            </form>
+
+
+            <div class="backTab">
+                <img src="{{url_for('static', filename='backimage.png')}}" class="backimage" onclick="goBackPage()">
+                <td2>
+                    <script>
+                        function goBackPage() {
+                            window.history.back();
+                        }
+                    </script>
+                </td2>
+            </div>
+        </div>
+</body>
+</html>

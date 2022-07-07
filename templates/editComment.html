@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App - New Note</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+    <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+    <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+    <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+    <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+
+    <a href="{{ url_for ('match_overview') }}" class="topLinks"> Battle Royale </a>
+</head>
+<body>
+    <style>
+        body {
+            width: 90%;
+            height: 100%;
+            background-image: url(static/skypic.jpg);
+            /* background-position: center; */
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100%;
+            min-width: 1017px;
+        }
+
+        @media screen and (max-width: 1024px) { /* Specific to this particular image */
+            img.bg {
+                left: 50%;
+                margin-left: -512px; /* 50% */
+            }
+        }
+    </style>
+
+
+    <div class="backgroundRect">
+        <h1>Welcome {{user}}! </h1>
+        <h1> Please add your comment!</h1>
+        {% if comment %}
+        <form action="{{ url_for('update_comment', comment_id=comment.id) }}" method="post">
+            {% else %}
+            <form action="new" method="post">
+                {% endif %}
+
+                <p><label>Comment </label></p>
+                <p>
+                    <textarea name="commText" rows="6" cols="0">
+                    {% if comment %}
+                        {{comment.text}}
+                    {% else %}
+                        Add your new comment here ...
+                    {% endif %}
+
+
+                    </textarea>
+
+                </p>
+                <p>
+                    {% if comment %}
+                    <input type="submit" value="Update Comment" />
+                    {% else %}
+                    <input type="submit" value="Add Comment" />
+                    {% endif %}
+                </p>
+            </form>
+        </form>
+
+
+        <div class="backTab">
+            <img src="{{url_for('static', filename='skyptic.png')}}" class="backimage" onclick="goBackPage()">
+            <td2>
+                <script>
+                    function goBackPage() {
+                        window.history.back();
+                    }
+                </script>
+            </td2>
+        </div>
+    </div>
+</body>
+</html>

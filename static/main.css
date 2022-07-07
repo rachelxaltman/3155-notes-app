@@ -1,0 +1,654 @@
+#container p:nth-child(3n+1) {
+    background-color: #F00;
+}
+
+#container p:nth-child(3n+2) {
+    background-color: #0F0;
+}
+
+#container p:nth-child(3n+3) {
+    background-color: #00F;
+}
+
+body {
+    padding: 30px 30px;
+}
+
+.backgroundRect {
+    background-color: seashell;
+}
+
+
+.topLinks {
+    color: white;
+    margin-left: auto;
+    font-size: 110%;
+    margin-right: auto;
+    width: 40%;
+    text-decoration: none;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+h1 {
+    color: palevioletred;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    font-size: 242%;
+}
+
+p2 {
+    margin-left: 320px;
+    margin-right: auto;
+    width: 40%;
+}
+
+.links {
+    color: black;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 160%;
+    text-decoration: none;
+}
+.homepageLinks {
+    color: black;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-right: 24%;
+    text-align: center;
+    font-size: 110%;
+    display: block;
+
+}
+
+.signInInfo {
+    color: black;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 160%;
+}
+
+
+
+p {
+    margin-left: 360px;
+    margin-right: auto;
+}
+
+input[type=button], input[type=submit] {
+    appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    box-sizing: border-box;
+    margin: 4em;
+    font: 400 60% Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+
+
+
+
+.username {
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+
+
+
+.div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+
+.password {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    font-size: 120%;
+}
+.cancelbtn {
+    margin-left: 360px;
+    margin-right: auto;
+}
+
+.create {
+    color: black;
+    font-weight: bold;
+    margin-left: 3%;
+    margin-right: 4%;
+    text-align: center;
+    font-size: 157%;
+}
+
+
+
+.notesFor {
+    text-align: center;
+    font-size: 190%;
+    color: black;
+    color: #006940;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    font-weight: bold;
+}
+
+/**
+.container {
+    padding: 100px 30px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+}
+*/
+
+
+
+.addNotes {
+    margin-left: 66%;
+}
+
+.addNote {
+    width: 15%;
+    height: 25%;
+    margin-left: -20%;
+}
+
+.text {
+    font-size: 170%;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: -214%;
+}
+.textR {
+    font-size: 170%;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: -7%;
+}
+
+.text2 {
+    font-size: 170%;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    text-decoration: underline;
+
+}
+
+.addComments {
+    margin-left: 66%;
+}
+
+
+.addComment {
+    width: 16%;
+    height: 28%;
+    margin-left: 23%;
+}
+
+.addCommentss {
+    width: 27%;
+    height: 31%;
+    margin-left: 23%;
+}
+.containNoteText {
+}
+
+
+
+.stickyNote {
+    font-size: 166%;
+    margin-left: 1%;
+    margin-right: 68%;
+}
+
+.containNoteEdit{
+
+
+}
+.editImagesss {
+    margin-left: auto;
+    margin-right: auto;
+    width: 22%;
+    height: 20%;
+}
+
+.editImages {
+    margin-left: auto;
+    margin-right: auto;
+    width: 37%;
+    height: 20%;
+}
+
+.editImagess {
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    height: 8%;
+}
+
+.containNoteDelete {
+}
+
+
+
+.deleteNote{
+
+
+}
+
+.formatNotes {
+
+}
+
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+    width: 0%;
+}
+
+th, td {
+    border-bottom: 1px solid #A9A9A9;
+    width: 0%;
+}
+
+tr:hover {
+    background-color: khaki;
+}
+
+th, td {
+    text-align: center;
+    width: 0%;
+}
+
+
+th2 {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+    width: 0%;
+}
+
+th2, td2 {
+    border-bottom: 1px solid #ddd;
+    width: 0%;
+}
+
+
+
+th2, td2 {
+    text-align: center;
+    width: 0%;
+}
+
+td{
+    display: table-cell;
+    vertical-align: inherit;
+
+}
+
+
+
+table {
+    border-collapse: separate;
+    text-indent: each-line;
+    border-spacing: 2px;
+    width:0%;
+}
+
+
+
+.containComments{
+
+
+}
+
+
+
+.containCom{
+
+
+}
+
+.containTexts{
+
+
+}
+
+
+
+.containText{
+
+
+}
+
+
+.notess {
+    font-family: "sans-serif", monospace;
+    font-weight: 500;
+}
+
+
+
+.containCommentTexts {
+    
+}
+
+
+.containCommentText {
+    font-style: italic;
+    font-weight: 500;
+}
+
+
+.commentAdded{
+
+
+
+}
+
+.backimage {
+    width: 5%;
+    height: 10%;
+}
+
+
+.backTab{
+
+
+}
+
+
+
+.editComment {
+    width: 10%;
+    height: 8%;
+    margin-left: 28%;
+}
+
+
+.pin {
+    width: 25%;
+    height: 13%;
+}
+
+
+.commentsEditing {
+    margin-left: 28%;
+}
+
+.td2 {
+    display: table-cell;
+    vertical-align: inherit;
+    display: list-item;
+}
+
+.checkmark {
+    width: 110%;
+    height: 19%;
+}
+
+.email {
+    color: black;
+
+    font-size: 200%;
+
+}
+
+
+.usernames {
+    color: black;
+
+    font-size: 200%;
+
+}
+
+.numOfNotes {
+    color: black;
+
+    font-size: 200%;
+
+}
+
+
+.accountInfo {
+    margin-left: 38%;
+    margin-right: auto;
+
+}
+
+
+
+.startMatch {
+    margin-left: 38%;
+    margin-right: auto;
+}
+
+.addNote {
+    margin-left: -12%;
+}
+
+.suggest {
+    color: black;
+    font-size: 154%;
+    font-weight: bold;
+    margin-left: 4%;
+    text-decoration: underline;
+}
+
+.topicImage {
+    margin-left: 9%;
+    width: 9%;
+}
+
+.player {
+    margin-left: 15%;
+    margin-right: auto;
+    text-decoration: underline;
+}
+
+
+.playerName {
+    margin-left: 22%;
+    margin-right: auto;
+}
+
+.adddTitle {
+    margin-left: 7%;
+    margin-right: auto;
+    text-decoration: underline;
+}
+
+.playerNamee {
+    margin-left: 7%;
+    margin-right: auto;
+    text-decoration: underline;
+}
+
+.noteTexts {
+    margin-left: 7%;
+    margin-right: auto;
+   
+
+}
+
+.noteTitle {
+    margin-left: 7%;
+    margin-right: auto;
+    font-weight: bold;
+}
+
+
+.customTopic {
+    margin-left: 25%;
+    margin-right: -8%;
+    font-weight: bold;
+    
+}
+
+.topics {
+    margin-left: 5%;
+    
+}
+
+.lobbyName {
+    margin-left: 15%;
+}
+.nextButton {
+    margin-left: 66%;
+}
+
+
+
+.backgroundRects {
+    height: 20%;
+    background-color: #cccccc;
+    background-image: linear-gradient(blue, yellow);
+    position: relative;
+    top: -2px;
+}
+
+
+.navigation {
+    height: 20%;
+    background-color: #cccccc;
+    background-image: linear-gradient(blue, yellow);
+   
+}
+
+
+.noteTitles {
+    margin-left: -61%;
+}
+
+.noteAdded {
+    margin-left: 15%;
+}
+
+.title {
+    margin-left: 15%;
+}
+
+
+.taskCheck {
+    margin-left: 64%;
+}
+
+
+
+.noteText {
+    margin-left: 24%;
+}
+
+
+.addPlayers {
+    margin-left: 30%;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.form-field {
+    margin-left: 30%;
+}
+
+.addPlayerClick {
+    margin-left: 30%;
+}
+
+.addPlayerSubmit {
+    margin-left: 30%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

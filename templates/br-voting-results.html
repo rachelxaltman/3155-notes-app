@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+
+
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+
+    <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+    <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+    <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+    <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+    <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+
+    <a href="{{ url_for ('match_overview') }}" class="topLinks"> Battle Royale </a>
+
+
+</head>
+<body>
+
+
+    <br />
+    <div class="notesFor">
+
+        Notes App: Battle Royale<br/>
+        Votign Results!
+        <br/>
+        Game: {{match.lobby}}
+        <br/>
+        {% if match.round == 0 %}
+        Round: Match Start! 
+        {% elif match.round <= 3 %}
+        Round: 1
+        {% elif match.round <= 6 %}
+        Round: 2
+        {% elif match.round <= 9 %}
+        Round: 3
+        {% elif match.round == 10 %}
+        Game Over!
+        Date: {{match.Date}}      
+        {% endif %}
+    </div>
+    <br />
+    {% if match.round <= 3 %}
+        <h1>Topic: {{match.topic1}}</h1>
+        {% elif match.round <= 6 %}
+        <h1>Topic: {{match.topic1}}, {{match.topic2}},</h1>
+        {% elif match.round <= 9 %}
+        <h1>Topic: {{match.topic1}}, {{match.topic2}}, and {{match.topic3}}</h1>
+    {% endif %}
+
+    <br/>
+    <br/>
+
+    <h1>Next Round:</h1>
+
+    <form action="{{ url_for('view_match', match_id=match.id) }}" method="post">
+        <input type="submit" value="Continue" class="button">
+    </form>
+
+
+
+
+    {% if procnotes %}
+    <table>
+    {% for note in procnotes|sort(reverse=true, attribute="votes")|sort(reverse=true, attribute="fortnite") %}
+    
+    <tr>
+            <div class="formatNotes">
+                <div class="containNoteText">
+
+                    <div class="containNoteText">
+                        <td>
+                            <div class="stickyNote">
+                                {{note.title}}<br/>
+                            </div>
+                            {% if match.round >= 9 %}
+                                {% if note.ranking == 1 %}
+                                    <h1>Rank: 1st</h1>
+                                    Winner!
+                                {% elif note.ranking == 2 %}
+                                    <h1>Rank: 2nd</h1>
+                                {% elif note.ranking == 3 %}
+                                    <h1>Rank: 3rd</h1>
+                                {% else %}
+                                    <h1>Rank: {{note.ranking}}th</h1>
+                                {% endif %}
+
+                                <h1>Votes: {{note.votes}}</h1>
+
+                                {% for play in players %}
+                                {%if play.id == note.player_id %}
+                                    Player: {{play.name}} <br/>
+                                {% endif %}
+
+                        {% endfor %}
+                            {% else %}
+                                {% if note.fortnite %}
+
+                                    <h1>Votes: {{note.votes}}</h1>
+
+                                {% else %}
+
+                                    <h1> Loss!!! </h1> 
+
+                                    {% for play in players %}
+                                        {%if play.id == note.player_id %}
+                                            Player: {{play.name}} <br/>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                {% endif %}
+                            {% endif %}
+
+
+                            <ul>
+                                <li>{{note.text1}}</li>
+                                {% if match.round >= 4 %} <li>{{note.text2}}</li> {% endif %}
+                                {% if match.round >= 7 %} <li>{{note.text3}}</li> {% endif %}
+                            </ul>
+                        </td>
+                    </div>
+
+                </div>
+
+        
+
+
+        {% if note.brcomments %}
+        {% if note.brcomments|length > 0 %}
+        <td>
+            <ul>
+                {% for comment in note.brcomments %}
+                <div class="containCommentTexts">
+                    <li>
+                        <div class="containCommentText">
+
+                            {{ comment.text }}
+                        </div>
+                </div>
+                {% endfor %}
+            </ul>
+        </td>
+        {% endif %}
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+    
+    <table>
+    {% endif %}
+    
+
+</body>
+</html>

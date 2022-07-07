@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App - New Note</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <a href="{{ url_for ('index') }}" class="topLinks">Home ||</a>
+    <a href="{{ url_for ('display_notes') }}" class="topLinks"> Notes ||</a>
+
+
+    <a href="{{ url_for ('sign_in') }}" class="topLinks"> Sign In ||</a>
+    <a href="{{ url_for ('logout') }}" class="topLinks"> Logout ||</a>
+
+    <a href="{{ url_for ('my_account') }}" class="topLinks"> My Account ||</a>
+</head>
+<body>
+    <nav>
+        <!--  add navigation links -->
+
+    </nav>
+    <div class="backgroundRect">
+        <h1>Welcome {{user}}! 
+            <br/>
+            Voting
+        </h1>
+        <h1>Game: {{match.lobby}}</h1>
+        {% if match.round == 0 %}
+        <h1>Round: Start! Pick a title</h1>
+        {% elif match.round <= 3 %}
+        <h1>Round: 1</h1>
+        {% elif match.round <= 6 %}
+        <h1>Round: 2</h1>
+        {% elif match.round <= 9 %}
+        <h1>Round: 3</h1>
+        {% endif %}
+
+        {% if match.round <= 3 %}
+        <h1>Topic: {{match.topic1}}</h1>
+        {% elif match.round <= 6 %}
+        <h1>Topic: {{match.topic1}}, {{match.topic2}},</h1>
+        {% elif match.round <= 9 %}
+        <h1>Topic: {{match.topic1}}, {{match.topic2}}, and {{match.topic3}}</h1>
+        {% endif %}
+
+        <p><label>Players </label></p>
+        <form action="{{ url_for('brnote_vote', match_id=match.id) }}" method="post">
+            <ui>
+                {% for player in match.players|sort(reverse=true, attribute="votes") %}
+                    <li>
+                        {{player.name}}
+                        <select name="{{player.name}}v1" method="GET" action="/">
+                            {% for note in procnotes %}
+                                <option value="{{note.id}}" SELECTED>{{note.title}}</option>"
+                            {% endfor %}
+                        </select>
+                        <select name="{{player.name}}v2" method="GET" action="/">
+                            {% for note in procnotes %}
+                                <option value="{{note.id}}" SELECTED>{{note.title}}</option>"
+                            {% endfor %}
+                        </select>
+                        <select name="{{player.name}}v3" method="GET" action="/">
+                            {% for note in procnotes %}
+                                <option value="{{note.id}}" SELECTED>{{note.title}}</option>"
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <br/>
+                {% endfor %}
+
+
+            </ui>
+            <br/>
+            <input type="submit" value="Submit Votes">
+        </form>
+
+
+        {% if procnotes %}
+        <table>
+        {% for note in procnotes %}
+        
+        <tr>
+                <div class="formatNotes">
+                    <div class="containNoteText">
+
+                        <div class="containNoteText">
+                            <td>
+                                <div class="stickyNote">
+                                    {{note.title}}<br/>
+                                </div>
+                                <ul>
+                                    <li>{{note.text1}}</li>
+                                    {% if match.round >= 4 %} <li>{{note.text2}}</li> {% endif %}
+                                    {% if match.round >= 7 %} <li>{{note.text3}}</li> {% endif %}
+                                </ul>
+                            </td>
+                        </div>
+
+                    </div>
+
+        
+            {% if note.brcomments %}
+            {% if note.brcomments|length > 0 %}
+            <td>
+                <ul>
+                    {% for comment in note.brcomments %}
+                    <div class="containCommentTexts">
+                        <li>
+                            <div class="containCommentText">
+                                {{ comment.text }}
+                            </div>
+                    </div>
+                    {% endfor %}
+                </ul>
+            </td>
+            {% endif %}
+            {% endif %}
+
+        </tr>
+        {% endfor %}
+        
+        <table>
+        {% endif %}
+
+    </body>
+    </html>
